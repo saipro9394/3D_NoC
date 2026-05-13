@@ -18,9 +18,9 @@ using namespace std;
 using namespace tinyxml2;
 
 #define SATURATION_THRESHOLD 1000
-#define PIR 0.001//0.002//0.0005 // 0.001 //1.0
+#define PIR 0.002//0.0005 // 0.001 //1.0
 int TEMP_THRESHOLD = 6000;
-const int Gw = 16;
+const int Gw = 8;
 const int Gl = 8;
 const int Gh = 4;
 const int NUNITS = 30;

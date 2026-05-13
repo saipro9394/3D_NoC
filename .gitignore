@@ -6,3 +6,4 @@ results/
 tgff-3.5
 output.txt
 *.grid.ttrace
+env/

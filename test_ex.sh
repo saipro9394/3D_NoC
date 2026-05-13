@@ -1,4 +1,4 @@
-cd /workspaces/3D_NoC/PAT-Noxim/PAT_Noxim/bin
+cd /workspaces/3D_Noc/PAT-Noxim/PAT_Noxim/bin
 make clean
 make
 cd ..
