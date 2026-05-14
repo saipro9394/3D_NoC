@@ -18,7 +18,7 @@ using namespace std;
 using namespace tinyxml2;
 
 #define SATURATION_THRESHOLD 1000
-#define PIR 0.002//0.0005 // 0.001 //1.0
+#define PIR 0.2//0.002//0.0005 // 0.001 //1.0
 int TEMP_THRESHOLD = 6000;
 const int Gw = 8;
 const int Gl = 8;
@@ -1424,6 +1424,13 @@ int main(int argc, char *argv[])
         // Re-implementing traffic print based on edges
         for (int j = 0; j < apps[i].edges.size(); j++)
         {
+            double max_vol = 1.0; // Avoid division by zero
+            for (size_t v = 0; v < apps[i].communicationVolume.size(); v++) {
+                if (apps[i].communicationVolume[v] > max_vol) {
+                    max_vol = apps[i].communicationVolume[v];
+                }
+            }
+
             int t1 = apps[i].edges[j][0];
             int t2 = apps[i].edges[j][1];
             int buf1 = cnv_task_buf(apps[i].id, t1);
@@ -1454,9 +1461,11 @@ int main(int argc, char *argv[])
                                 edges_on_tsv++;
                             if (v1[k][2] != v1[k][3])
                             {
+                                double edge_weight = apps[i].communicationVolume[j] / max_vol;
+                                double specific_pir = PIR * edge_weight;
                                 testTraffic << v1[k][1] << " " << v2[l][1] << " "
-                                            << PIR * apps[i].communicationVolume[j] << " "
-                                            << PIR * apps[i].communicationVolume[j] << " "
+                                            << specific_pir << " "
+                                            << specific_pir << " "
                                             << v1[k][2] << " " << v1[k][3] << endl;
                             }
                             break;

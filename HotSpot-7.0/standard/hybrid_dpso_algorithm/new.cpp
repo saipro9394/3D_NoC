@@ -23,7 +23,7 @@ using namespace tinyxml2;
 */
 
 #define SATURATION_THRESHOLD 1000
-#define PIR 0.002//0.0005 //0.001 //1.0
+#define PIR 0.2//0.002//0.0005 //0.001 //1.0
 int TEMP_THRESHOLD = 6000;
 const int Gw = 8;
 const int Gl = 8;
@@ -1094,6 +1094,13 @@ int main(int argc, char *argv[])
         // Iterate edges to log communication traffic
         for (int j = 0; j < apps[i].edges.size(); j++)
         {
+            double max_vol = 1.0; // Avoid division by zero
+            for (size_t v = 0; v < apps[i].communicationVolume.size(); v++) {
+                if (apps[i].communicationVolume[v] > max_vol) {
+                    max_vol = apps[i].communicationVolume[v];
+                }
+            }
+
             // Calculate key for the map (AppID*10000 + TaskID)
             int first_task = buf + apps[i].edges[j][0];
             int second_task = buf + apps[i].edges[j][1];
@@ -1121,12 +1128,18 @@ int main(int argc, char *argv[])
                         {
                             if (abs(list1[k][1] - list2[l][1]) == Gw * Gl)
                                 edges_on_tsv++;
-                            testTraffic << list1[k][1] << " "
-                                        << list2[l][1] << " "
-                                        << PIR * apps[i].communicationVolume[j] << " "
-                                        << PIR * apps[i].communicationVolume[j] << " "
-                                        << list1[k][2] << " "
-                                        << list1[k][3] << endl;
+                            if (list1[k][2] != list1[k][3])
+                            {
+                                double edge_weight = apps[i].communicationVolume[j] / max_vol;
+                                double specific_pir = PIR * edge_weight;
+                                testTraffic << list1[k][1] << " "
+                                            << list2[l][1] << " "
+                                            << specific_pir << " "
+                                            << specific_pir << " "
+                                            << list1[k][2] << " "
+                                            << list1[k][3] << endl;
+                            }
+                        
                             break;
                         }
                     }

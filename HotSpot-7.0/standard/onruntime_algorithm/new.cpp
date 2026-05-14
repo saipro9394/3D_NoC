@@ -4,7 +4,7 @@
 
 using namespace std;
 using namespace tinyxml2;
-#define PIR 0.002//0.0005 //0.001 //1.0
+#define PIR 0.2//0.002//0.0005 //0.001 //1.0
 
 const int Gw = 8;
 const int Gl = 8;
@@ -15,7 +15,7 @@ const int task_multiplyer = 10000;
 int glbmark = 1;
 int mnt = 0;
 
-const int BEAM_WIDTH = 1;
+const int BEAM_WIDTH = 3;
 
 double edges_on_tsv = 0;
 double avg_node_layer = 0;
@@ -1062,6 +1062,19 @@ int main(int argc, char *argv[])
 
         for (int j = 0; j < tapps[i].edges.size(); j++)
         {
+
+            // --- ADDED: NORMALIZED PROPORTIONAL INJECTION ---
+            // 1. Find the absolute maximum edge volume in this specific application
+            double max_vol = 1.0; // Avoid division by zero
+            for (size_t v = 0; v < tapps[i].commVolume.size(); v++) {
+                if (tapps[i].commVolume[v] > max_vol) {
+                    max_vol = tapps[i].commVolume[v];
+                }
+            }
+
+            int t1 = tapps[i].edges[j][0];
+            int t2 = tapps[i].edges[j][1];
+
             int first_task = buf + tapps[i].edges[j][0];
             int second_task = buf + tapps[i].edges[j][1];
 
@@ -1084,18 +1097,22 @@ int main(int argc, char *argv[])
                 {
                     // Check if the sequence ID of the second task matches the loop index 'k'
                     // (Matches the logic: task_timestamp[second_task][l][0] == k)
-                    if (vec_second[l][0] == k)
+                   if (vec_second[l][0] == k)
                     {
-                        // Use safe vector access (vec_first[k] and vec_second[l])
                         if (abs(vec_first[k][1] - vec_second[l][1]) == Gw * Gl)
                             edges_on_tsv++;
 
                         if (vec_first[k][2] != vec_first[k][3])
                         {
+                            // 2. Calculate the normalized proportional PIR for this specific edge
+                            double edge_weight = tapps[i].commVolume[j] / max_vol;
+                            double specific_pir = PIR * edge_weight;
+
+                            // 3. Print the safe, normalized PIR
                             testTraffic << vec_first[k][1] << " "
                                         << vec_second[l][1] << " "
-                                        << PIR * tapps[i].commVolume[j] << " "
-                                        << PIR * tapps[i].commVolume[j] << " "
+                                        << specific_pir << " "
+                                        << specific_pir << " "
                                         << vec_first[k][2] << " "
                                         << vec_first[k][3] << endl;
                         }

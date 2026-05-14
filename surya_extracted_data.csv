@@ -1,7 +1,7 @@
-Benchmark,Application,Algorithm,Energy,Power,Delay,Running Time,Peak Temperature,Average Temperature,Avg Node Layer,Avg Edges TSV
-netrace_benchmark,blackscholes,hybrid_dpso_algorithm,0.0034365,3.4365e-07,2099.2,0.142712,457.09,432.92724609375,1.53125,0.0233135
-netrace_benchmark,blackscholes,onruntime_algorithm,0.00343748,3.43748e-07,2025.52,0.0013743,439.162,432.33336328125,3.0,0.0
-netrace_benchmark,blackscholes,pair_algorithm,0.00343282,3.43282e-07,1768.47,0.0682085,448.498,432.7051875,0.5,0.015873
-netrace_benchmark,bodytrack,hybrid_dpso_algorithm,0.0034379,3.4379e-07,2048.58,0.131827,457.362,433.05350390625,1.53125,0.0233135
-netrace_benchmark,bodytrack,onruntime_algorithm,0.00343748,3.43748e-07,2025.52,0.00142687,439.162,432.33336328125,3.0,0.0
-netrace_benchmark,bodytrack,pair_algorithm,0.00344216,3.44216e-07,1986.23,0.0591447,453.471,433.8958046875,0.5,0.015873
+Benchmark,Application,Algorithm,Energy,Power,Delay,Throughput,Running Time,Peak Temperature,Average Temperature,Avg Node Layer,Avg Edges TSV
+netrace_benchmark,blackscholes,hybrid_dpso_algorithm,0.0034365,3.4365e-07,2099.2,1.01544,0.133739,457.09,432.92724609375,1.53125,0.0233135
+netrace_benchmark,blackscholes,onruntime_algorithm,0.00343748,3.43748e-07,2025.52,1.02215,0.00130378,439.162,432.33336328125,3.0,0.0
+netrace_benchmark,blackscholes,pair_algorithm,0.00343282,3.43282e-07,1768.47,0.979949,0.0611188,448.498,432.7051875,0.5,0.015873
+netrace_benchmark,bodytrack,hybrid_dpso_algorithm,0.0034379,3.4379e-07,2048.58,0.983717,0.132982,457.362,433.05350390625,1.53125,0.0233135
+netrace_benchmark,bodytrack,onruntime_algorithm,0.00343748,3.43748e-07,2025.52,1.02215,0.00141207,439.162,432.33336328125,3.0,0.0
+netrace_benchmark,bodytrack,pair_algorithm,0.00344216,3.44216e-07,1986.23,0.970361,0.0576889,453.471,433.8958046875,0.5,0.015873
