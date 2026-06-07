@@ -26,7 +26,7 @@ thermal_config_t default_thermal_config(void)
 	thermal_config_t config;
 
 	/* chip specs	*/
-	config.t_chip = 0.0015e-3//0.15e-3;            /* chip thickness in meters	*/
+	config.t_chip = 0.00015e-3;//0.15e-3;            /* chip thickness in meters	*/
 	config.k_chip = 100.0;              /* chip thermal conductivity in W/(m-K) */
 	config.p_chip = 1.75e6;             /* chip specific heat in J/(m^3-K) */
 	/* temperature threshold for DTM (Kelvin)*/
@@ -34,7 +34,7 @@ thermal_config_t default_thermal_config(void)
 
 	/* heat sink specs	*/
 	config.c_convec = 140.4;            /* convection capacitance in J/K */
-	config.r_convec = 0.001;//0.1;              /* convection resistance in K/W	*/
+	config.r_convec = 0.0001;//0.1;              /* convection resistance in K/W	*/
 	config.s_sink = 60e-3;              /* heatsink side in m	*/
 	config.t_sink = 35.5e-3;            /* heatsink thickness  in m	*/ //6.9e-3 original
 	config.k_sink = 400.0;              /* heatsink thermal conductivity in W/(m-K) */
