@@ -1,7 +1,7 @@
 #!/bin/bash
 
 multimedia_benchmark=("MWD" "VOPD" "DVOPD")
-netrace_benchmark=( "bodytrack" )
+netrace_benchmark=("bodytrack")
 random_benchmark=("graph3" )
 # "blackscholes" "bodytrack" "canneal" "dedup" "ferret" "fluidanimate" "swaptions" "vips"
 dx=8
